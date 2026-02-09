@@ -29,7 +29,7 @@ public class ParkingLotManager {
     }
 
     //initialize 5 floors with different spot types
-    private void initializeParkingLot() {
+    private void initializeParkingLot() {//basically in every floor row 2 spot 1 (oku) and row 2 spot 2 (vip)
         for (int floor = 1; floor <= 5; floor++) {
             for (int row = 1; row <= 2; row++) {
                 for (int spotNum = 1; spotNum <= 5; spotNum++) {
@@ -38,16 +38,16 @@ public class ParkingLotManager {
                     String type;
                     double rate;
 
-                    if (row == 1) {
+                    if (row == 1) {//row 1 in every floor reserved for SUV and normal cars
                         type = "Regular";
                         rate = Constants.RATE_REGULAR;
-                    } else if (spotNum == 1) {
+                    } else if (spotNum == 1) {//row 2 spot 1 is always for oku
                         type = "Handicapped";
                         rate = Constants.RATE_HANDICAPPED_RESERVED;
-                    } else if (spotNum == 2) {
+                    } else if (spotNum == 2) {//spot 2 in row 2 is for vip
                         type = "Reserved";
                         rate = Constants.RATE_VIP_RESERVED;
-                    } else {
+                    } else {//rest of row 2 is for smaller vehicles/motor
                         type = "Compact";
                         rate = Constants.RATE_COMPACT;
                     }
