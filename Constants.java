@@ -13,7 +13,7 @@ public final class Constants {
     //parking rates (rm/hour)
     public static final double RATE_COMPACT = 2.0;
     public static final double RATE_REGULAR = 5.0;
-    public static final double RATE_HANDICAPPED_RESERVED = 2.0; // rm2 for oku if no oku card 
+    public static final double RATE_HANDICAPPED_RESERVED = 2.0; // rm2 if no oku card 
     public static final double RATE_HANDICAPPED_CARD = 0.0;    // free for oku card holders 
     public static final double RATE_VIP_RESERVED = 10.0;
 
