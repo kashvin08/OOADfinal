@@ -9,6 +9,7 @@ public final class Constants {
     public static final String EXIT_FILE = DATA_DIR + "exit_history.txt";
     public static final String FINES_FILE = DATA_DIR + "unpaid_fines.txt";
     public static final String REVENUE_FILE = DATA_DIR + "revenue_report.txt";
+    public static final String EXIT_FILE = DATA_DIR + "exit.txt";
     public static final String DELIMITER = "|";
 
     //parking rates (rm/hour) 
@@ -31,4 +32,5 @@ public final class Constants {
     public static final Color PRIMARY_COLOR = new Color(0, 102, 204);
     public static final int WINDOW_WIDTH = 900;
     public static final int WINDOW_HEIGHT = 700;
+
 }
