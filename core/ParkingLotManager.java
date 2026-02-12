@@ -93,4 +93,25 @@ public class ParkingLotManager {
     public double getTotalRevenue() {
         return totalRevenue;
     }
+
+
+    // ADMIN GUI --- Ming Sheng
+
+    public List<ParkingSpot> getAllSpots() {
+        return new ArrayList<>(allSpots);
+    }
+
+    private String currentFineScheme = "Fixed"; // Default scheme
+
+    public void setFineScheme(String scheme) {
+        this.currentFineScheme = scheme;
+    }
+
+    public String getFineScheme() {
+        return currentFineScheme;
+    }
+
+    public int getTotalParkedVehicles() {
+        return (int) allSpots.stream().filter(ParkingSpot::isOccupied).count();
+    }
 }
