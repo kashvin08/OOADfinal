@@ -5,7 +5,7 @@ import java.awt.event.*;
 import java.util.List;
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
-import logic.finance.*;
+import logic.*;
 
 public class AdminPanel extends JPanel implements ActionListener {
 
