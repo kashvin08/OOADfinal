@@ -1,7 +1,9 @@
 package logic;
 
+import core.FileHandler;
 import java.util.*;
 import java.util.stream.Collectors;
+import shared.Constants;
 
 public class FinancialManager {
     private List<Fine> fines;
@@ -11,7 +13,8 @@ public class FinancialManager {
     public FinancialManager() {
         this.fines = new ArrayList<>();
         this.transactions = new ArrayList<>();
-        this.currentFineScheme = new FineSchemeA(); // Default scheme
+        this.currentFineScheme = new FineSchemeA();
+        loadFinesFromFile();
     }
 
     public void setFineScheme(FineScheme scheme) {
@@ -28,6 +31,7 @@ public class FinancialManager {
         
         Fine fine = new Fine(licensePlate, fineAmount, reason, currentFineScheme);
         fines.add(fine);
+        saveFineToFile(fine);
         
         return fine;
     }
@@ -55,6 +59,7 @@ public class FinancialManager {
         if (paymentSuccess) {
             transaction.markAsSuccessful();
             fine.markAsPaid();
+            saveAllFinesToFile();
         }
         
         transactions.add(transaction);
@@ -98,5 +103,26 @@ public class FinancialManager {
         return transactions.stream()
                 .filter(t -> t.getLicensePlate().equalsIgnoreCase(licensePlate))
                 .collect(Collectors.toList());
+    }
+    
+    private void saveFineToFile(Fine fine) {
+        FileHandler.saveRecord(Constants.FINES_FILE, fine.toFileString());
+    }
+    
+    private void saveAllFinesToFile() {
+        List<String> fineRecords = fines.stream()
+                .map(Fine::toFileString)
+                .collect(Collectors.toList());
+        FileHandler.overwriteFile(Constants.FINES_FILE, fineRecords);
+    }
+    
+    private void loadFinesFromFile() {
+        List<String> records = FileHandler.loadAllRecords(Constants.FINES_FILE);
+        for (String record : records) {
+            Fine fine = Fine.fromFileString(record);
+            if (fine != null) {
+                fines.add(fine);
+            }
+        }
     }
 }
