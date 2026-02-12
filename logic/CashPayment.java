@@ -1,8 +1,5 @@
-package logic.finance;
+package logic;
 
-/**
- * Cash payment implementation
- */
 public class CashPayment implements PaymentMethod {
     private double amountTendered;
     
@@ -15,7 +12,6 @@ public class CashPayment implements PaymentMethod {
         if (!validate() || amountTendered < amount) {
             return false;
         }
-        // In real system, this would interface with cash register
         return true;
     }
     
@@ -37,3 +33,4 @@ public class CashPayment implements PaymentMethod {
         return amountTendered;
     }
 }
+
