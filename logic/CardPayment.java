@@ -1,8 +1,5 @@
-package logic.finance;
+package logic;
 
-/**
- * Card payment implementation (Credit/Debit)
- */
 public class CardPayment implements PaymentMethod {
     private String cardNumber;
     private String cardHolderName;
@@ -21,8 +18,6 @@ public class CardPayment implements PaymentMethod {
         if (!validate()) {
             return false;
         }
-        // In real system, this would interface with payment gateway
-        // Simulate payment processing
         return true;
     }
     
@@ -33,7 +28,6 @@ public class CardPayment implements PaymentMethod {
     
     @Override
     public boolean validate() {
-        // Basic validation
         if (cardNumber == null || cardNumber.length() < 13 || cardNumber.length() > 19) {
             return false;
         }
@@ -47,8 +41,7 @@ public class CardPayment implements PaymentMethod {
             return false;
         }
         return true;
-    }
-    
+    }    
     public String getMaskedCardNumber() {
         if (cardNumber == null || cardNumber.length() < 4) {
             return "****";
@@ -56,3 +49,4 @@ public class CardPayment implements PaymentMethod {
         return "**** **** **** " + cardNumber.substring(cardNumber.length() - 4);
     }
 }
+
