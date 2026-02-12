@@ -22,6 +22,17 @@ public class Fine {
         this.fineId = generateFineId();
     }
     
+    public Fine(String fineId, String licensePlate, double amount, LocalDateTime issuedDate, 
+                boolean paid, String reason, String schemeName) {
+        this.fineId = fineId;
+        this.licensePlate = licensePlate;
+        this.amount = amount;
+        this.issuedDate = issuedDate;
+        this.paid = paid;
+        this.reason = reason;
+        this.scheme = null;
+    }
+    
     private String generateFineId() {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyyMMddHHmmss");
         return "F-" + licensePlate + "-" + issuedDate.format(formatter);
@@ -39,6 +50,36 @@ public class Fine {
     public boolean isPaid() { return paid; }
     public String getReason() { return reason; }
     public FineScheme getScheme() { return scheme; }
+    
+    public String toFileString() {
+        DateTimeFormatter formatter = DateTimeFormatter.ISO_LOCAL_DATE_TIME;
+        String schemeName = (scheme != null) ? scheme.getSchemeName() : "Unknown";
+        return String.join("|", 
+            fineId, 
+            licensePlate, 
+            String.valueOf(amount), 
+            issuedDate.format(formatter), 
+            String.valueOf(paid), 
+            reason,
+            schemeName
+        );
+    }
+    
+    public static Fine fromFileString(String line) {
+        String[] parts = line.split("\\|");
+        if (parts.length < 7) return null;
+        
+        DateTimeFormatter formatter = DateTimeFormatter.ISO_LOCAL_DATE_TIME;
+        return new Fine(
+            parts[0],
+            parts[1],
+            Double.parseDouble(parts[2]),
+            LocalDateTime.parse(parts[3], formatter),
+            Boolean.parseBoolean(parts[4]),
+            parts[5],
+            parts[6]
+        );
+    }
     
     @Override
     public String toString() {
